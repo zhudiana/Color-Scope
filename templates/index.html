@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CPG - Color Palette Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #222;
+            color: white;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        main {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        #image-preview {
+            text-align: center;
+        }
+
+        #image-preview img {
+            max-width: 300px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-top: 10px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        input[type="file"] {
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #222;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #444;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #eee;
+        }
+
+        .swatch {
+            width: 50px;
+            height: 25px;
+            border: 1px solid #ccc;
+        }
+
+        .external-links {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .external-links a {
+            display: inline-block;
+            margin: 10px;
+            color: #222;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .external-links a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            table th, table td {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" style="color: white; text-decoration: none;"><h1>CPG</h1></a>
+    </header>
+
+    <main>
+        <!-- Image Preview Section -->
+        <section id="image-preview">
+            <h2>Try it with a Sample</h2>
+            <p>Not sure what to upload? Here's a sample image and the color palette it generated:</p>
+            <!-- Replace this with uploaded image -->
+            {% if image_url %}
+                <img src="{{ image_url }}" alt="Uploaded Image">
+            {% else %}
+                <img src="https://www.coolphptools.com/userfiles/images/sample.jpg?rand=" alt="Sample Image">
+            {% endif %}
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Color Code</th>
+                        <th>Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Replace this with dynamically generated colors -->
+                    {% if colors %}
+                        {% for color in colors %}
+                            <tr>
+                                <td><div class="swatch" style="background-color: {{ color.hex }};"></div></td>
+                                <td>{{ color.hex }}</td>
+                                <td>{{ color.percentage }}%</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr><td><div class="swatch" style="background-color: #f0a800;"></div></td><td>#f0a800</td><td>22.17%</td></tr>
+                        <tr><td><div class="swatch" style="background-color: #606030;"></div></td><td>#606030</td><td>17.43%</td></tr>
+                        <tr><td><div class="swatch" style="background-color: #d87800;"></div></td><td>#d87800</td><td>15.56%</td></tr>
+                        <tr><td><div class="swatch" style="background-color: #484818;"></div></td><td>#484818</td><td>9.79%</td></tr>
+                        <tr><td><div class="swatch" style="background-color: #901818;"></div></td><td>#901818</td><td>7.69%</td></tr>
+                        <tr><td><div class="swatch" style="background-color: #301818;"></div></td><td>#301818</td><td>4.91%</td></tr>
+                        <tr><td><div class="swatch" style="background-color: #787848;"></div></td><td>#787848</td><td>4.89%</td></tr>
+                        <tr><td><div class="swatch" style="background-color: #c03018;"></div></td><td>#c03018</td><td>3.17%</td></tr>
+                        <tr><td><div class="swatch" style="background-color: #d86018;"></div></td><td>#d86018</td><td>2.27%</td></tr>
+                        <tr><td><div class="swatch" style="background-color: #181800;"></div></td><td>#181800</td><td>2.21%</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Upload Form -->
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <h2>Upload Your Own Image</h2>
+            <input type="file" id="upload" name="image" accept="image/*" required>
+            <br>
+            <button type="submit">Generate Palette</button>
+        </form>
+
+        <!-- Links -->
+        <div class="external-links">
+            <a href="https://github.com/zhudiana" target="_blank">📁 View Source on GitHub</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; {{ year }} CPG — Bringing colors to life 🎨
+    </footer>
+
+    <script>
+        const upload = document.getElementById('upload');
+        const preview = document.getElementById('preview');
+
+        upload?.addEventListener('change', function() {
+            const file = upload.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
