@@ -28,7 +28,7 @@ Technologies
 Installation
 1. Clone the repository:
 
-git clone https://github.com/zhudiana/CPG.git
+git clone https://github.com/zhudiana/Color-Paletter-Generator.git    
 cd CPG
 
 2. Set up a virtual environment:
