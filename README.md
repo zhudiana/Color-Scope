@@ -29,7 +29,7 @@ Installation
 1. Clone the repository:
 
 git clone https://github.com/zhudiana/Color-Paletter-Generator.git    
-cd CPG
+cd Color-Paletter-Generator
 
 2. Set up a virtual environment:
 
